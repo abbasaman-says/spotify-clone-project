@@ -10,6 +10,8 @@ function MusicCard({ music, onPlay }) {
 
             <p>{music.artist?.username}</p>
 
+            <p>{music.album?.title || "No Album"}</p>
+
             <button onClick={() => onPlay(music)}>
                 ▶ Play
             </button>

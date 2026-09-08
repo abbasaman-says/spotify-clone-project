@@ -14,10 +14,15 @@ function AuthProvider({ children }) {
 
     async function checkLogin() {
         try {
-            await api.get("/api/music");
+            const response = await api.get("/api/auth/me");
+
+            setUser(response.data.user);
             setIsLoggedIn(true);
+
         } catch (error) {
+            setUser(null);
             setIsLoggedIn(false);
+
         } finally {
             setLoading(false);
         }

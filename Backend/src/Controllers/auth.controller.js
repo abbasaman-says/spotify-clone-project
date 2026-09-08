@@ -6,6 +6,13 @@ async function registerUser(req, res) {
 
     const { username, email, password, role = "user" } = req.body;
 
+    // role security check
+    if (role !== "user" && role !== "artist") {
+        return res.status(400).json({
+            message: "Invalid role"
+        });
+    }
+
     // Check if user already exists
     const isUserAlreadyExists = await userModel.findOne({
         $or: [
@@ -37,10 +44,8 @@ async function registerUser(req, res) {
         role: user.role
     }, process.env.JWT_SECRET);
 
-    // Set token in cookie
     res.cookie("token", token);
 
-    // Send response
     res.status(201).json({
         message: "User registered successfully",
 
@@ -110,6 +115,33 @@ async function logoutUser(req, res) {
     res.clearCookie("token")
     res.status(200).json({ message: "User Logged Out Seccessfully" })
 }
+async function getCurrentUser(req, res) {
+    try {
+        const user = await userModel.findById(req.user.id).select("-password");
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        res.status(200).json({
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                role: user.role
+            }
+        });
+
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({
+            message: "Server error"
+        });
+    }
+}
 
 
-module.exports = { registerUser, LoginUser , logoutUser};  
+module.exports = { registerUser, LoginUser, logoutUser, getCurrentUser };  

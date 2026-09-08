@@ -7,6 +7,7 @@ function Register() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [role, setRole] = useState("user");
 
     const navigate = useNavigate();
 
@@ -17,7 +18,8 @@ function Register() {
             const response = await api.post("/api/auth/register", {
                 username,
                 email,
-                password
+                password,
+                role
             });
 
             console.log("REGISTER RESPONSE:", response.data);
@@ -62,6 +64,16 @@ function Register() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
+
+                    <br />
+
+                    <select
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                    >
+                        <option value="user">User</option>
+                        <option value="artist">Artist</option>
+                    </select>
 
                     <br />
 

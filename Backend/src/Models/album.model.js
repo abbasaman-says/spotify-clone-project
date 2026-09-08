@@ -18,6 +18,6 @@ const albumMusicSchema = new mongoose.Schema({
     }
 });
 
-const albumMusicModel = mongoose.model("album", albumMusicSchema)
+const albumMusicModel = mongoose.model("Album", albumMusicSchema)
 
 module.exports =  albumMusicModel
