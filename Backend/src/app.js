@@ -17,7 +17,7 @@ app.use(cookieParser());
 //     credentials: true
 // }));
 app.use(cors({
-    origin: "*", // yahan apna Vercel wala live frontend URL dein (ya '*' saari requests allow karne ke liye)
+    origin: true, // yahan apna Vercel wala live frontend URL dein (ya '*' saari requests allow karne ke liye)
     // origin: "https://spotify-clone-project-gules.vercel.app", // yahan apna Vercel wala live frontend URL dein (ya '*' saari requests allow karne ke liye)
     credentials: true
 }));
