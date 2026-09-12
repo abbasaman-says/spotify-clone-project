@@ -12,8 +12,12 @@ app.use(express.json());
 app.use(cookieParser());
 
 // ye frontend bnaty wqt ye lkha code
+// app.use(cors({
+//     origin: "http://localhost:5174",
+//     credentials: true
+// }));
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://spotify-clone-project-gules.vercel.app", // yahan apna Vercel wala live frontend URL dein (ya '*' saari requests allow karne ke liye)
     credentials: true
 }));
 
